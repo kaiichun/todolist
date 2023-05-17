@@ -21,6 +21,7 @@ if ( $completedtask == 1 ) {
     $completedtask = 1;
 }
 
+
 if (empty($deletetask)
     $sql = 'UPDATE todolist set completed = :completed WHERE id = :id';
     // prepare
