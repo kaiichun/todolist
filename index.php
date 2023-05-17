@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO App</title>
+    <title>TO DO App</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -40,7 +40,7 @@
       style="max-width: 500px; margin: 60px auto;"
     >
       <div class="card-body">
-        <h3 class="card-title mb-3">My Todo List</h3>
+        <h3 class="card-title mb-3">My To do List</h3>
         <ul class="list-group">
         <?php foreach ($todolist as $todolists) { ?>
             <li
@@ -59,35 +59,15 @@
                             value="<?= $todolists["id"]; ?>"
                             />
                             <?php
-                              if($todolists["completed"] ==1){
-                                echo
-                                "<button class='btn btn-sm btn-success'>
-                                  <i class='bi bi-check-square'></i>
-                                </button>";
+                              
+                              if($todolists["completed"] == 1){
+                                echo '<button class="btn btn-sm btn-success">'.'<i class="bi bi-check-square"></i>'.'</button>'.'<span class="ms-2 text-decoration-line-through">'.$todolists['task'].'</span>';
                               }else{
-                                echo"
-                                <button class='btn btn-sm btn-light'>
-                                  <i class='bi bi-square'></i>
-                                </button>";
+                                echo '<button class="btn btn-sm btn-light">'.'<i class="bi bi-square"></i>'.'</button>'.'<span class="ms-2  ">'.$todolists['task'].'</span>';
                               }
-
-                             if ($todolists['completed'] == 1){
-                                echo "<span class='ms-2 text-decoration-line-through'>".$todolists['task']."</span>";
-                             } else {
-                              echo "<span class='ms-2'>".$todolists['task']."</span>";
-                             }
-
-
-
                             ?>
-
-                            
-                            <button class="btn btn-sm btn-light">
-                <i class="bi bi-square"></i>
-              </button>
-            
-              <span class="ms-2"><?= $todolists["task"]; ?></span>
-            </form>  </div>
+            </form>  
+          </div>
             <div>
             <form method="POST" action="deletetask.php">
                         <input 
@@ -102,19 +82,7 @@
             </div>
           </li>
         <?php } ?>
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div>
-           
-              Task 1</span>
-            </div>
-            <div>
-              <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
-              </button>
-            </div>
-          </li>
+
         </ul>
         <div class="mt-4">
           <form method="POST" action="addtask.php" class="d-flex justify-content-between align-items-center">

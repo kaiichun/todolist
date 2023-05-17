@@ -21,7 +21,9 @@ if ( $completedtask == 1 ) {
     $completedtask = 1;
 }
 
-if (empty($deletetask)
+if (empty($deletetask)){
+       echo"ERROR 404 =)"; 
+} else {
     $sql = 'UPDATE todolist set completed = :completed WHERE id = :id';
     // prepare
     $query = $database->prepare( $sql );
@@ -30,9 +32,7 @@ if (empty($deletetask)
     $query->execute([ 
         'completed' => $completedtask,
         'id' =>$deletetask
-
-    ]);        
-} else {
+    ]); 
     header("Location: index.php");
     exit;
 

@@ -15,7 +15,7 @@ $database = new PDO(
 $deletetask = $_POST['deletetask'];
 
 if(empty($deletetask)){
-    echo "ERROR 404";
+    echo "ERROR 404 =)";
 }else{
     $sql = "DELETE FROM todolist WHERE id = :id";
     $query = $database->prepare($sql);
