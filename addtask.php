@@ -10,12 +10,13 @@ $database = new PDO(
     $dbpassword
 );
 
-$task_name = $_POST['task_name'];
+    $task_name = $_POST['task_name'];
+
 if(empty($task_name)){
     echo "ERROR 404";
 }else{
-    $sql = 'INSERT INTO todolist (`task`,`completed`) VALUES(:task,:completed)';
-    $query = $database->prepare($sql);
+    $sql='INSERT INTO todolist (`task`,`completed`) VALUES(:task,:completed)';
+    $query=$database->prepare($sql);
     $query->execute([
         'task' => $task_name,
         'completed' => 0

@@ -1,4 +1,7 @@
 <?php
+
+    session_start();
+
     $todolist = [];
     $host = 'devkinsta_db';
     $dbname = 'ToDoList';
@@ -41,63 +44,67 @@
     >
       <div class="card-body">
         <h3 class="card-title mb-3">My To do List</h3>
-        <ul class="list-group">
-        <?php foreach ($todolist as $todolists) { ?>
-            <li
-            class="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div>
-            <form method="POST" action="completedtask.php">
+          <?php if ( isset( $_SESSION["user"] ) ) { ?>
+            <a href="logout.php" class='m-2'>Logout</a>
+          <?php } else { ?>
+            <a href="login.php" class='m-2'>Login</a>
+            <a href="signup.php" class='m-2'>Sign Up</a>
+          <?php } ?>
+            <ul class="list-group mt-4"> 
+              <?php if ( isset( $_SESSION["user"] ) ) { ?>
+                <?php foreach ($todolist as $todolists) { ?>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <form method="POST" action="completedtask.php">
                         <input
-                            type="hidden"
-                            name="completedtask"
-                            value= "<?= $todolists["completed"]; ?>"
-                            />
-                          <input 
-                            type="hidden"
-                            name="deletetask"
-                            value="<?= $todolists["id"]; ?>"
-                            />
-                            <?php
-                              
-                              if($todolists["completed"] == 1){
-                                echo '<button class="btn btn-sm btn-success">'.'<i class="bi bi-check-square"></i>'.'</button>'.'<span class="ms-2 text-decoration-line-through">'.$todolists['task'].'</span>';
-                              }else{
-                                echo '<button class="btn btn-sm btn-light">'.'<i class="bi bi-square"></i>'.'</button>'.'<span class="ms-2  ">'.$todolists['task'].'</span>';
-                              }
-                            ?>
-            </form>  
-          </div>
-            <div>
-            <form method="POST" action="deletetask.php">
+                          type="hidden"
+                          name="completedtask"
+                          value= "<?= $todolists["completed"]; ?>"
+                        />
                         <input 
-                            type="hidden"
-                            name="deletetask"
-                            value="<?= $todolists["id"]; ?>"
-                            />
-              <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
-              </button>
-              </form>
-            </div>
-          </li>
+                          type="hidden"
+                          name="deletetask"
+                          value="<?= $todolists["id"]; ?>"
+                        />
+                        <?php
+                          if($todolists["completed"] == 1){
+                            echo '<button class="btn btn-sm btn-success">'.'<i class="bi bi-check-square"></i>'.'</button>'.'<span class="ms-2 text-decoration-line-through">'.$todolists['task'].'</span>';
+                          }else{
+                            echo '<button class="btn btn-sm btn-light">'.'<i class="bi bi-square"></i>'.'</button>'.'<span class="ms-2  ">'.$todolists['task'].'</span>';
+                          }
+                        ?>
+                      </form>  
+                    </div>
+                    <div>
+                      <form method="POST" action="deletetask.php">
+                        <input 
+                          type="hidden"
+                          name="deletetask"
+                          value="<?= $todolists["id"]; ?>"
+                        />
+                          <button class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                      </form>
+                    </div>
+                  </li>
+                <?php } ?>
+            </ul>
+              <div class="mt-4">
+                <form method="POST" action="addtask.php" class="d-flex justify-content-between align-items-center">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Add new item..."
+                    name="task_name"
+                  />
+                    <button class="btn btn-primary btn-sm rounded ms-2">Add</button>
+                </form>
+              </div>
         <?php } ?>
-
-        </ul>
-        <div class="mt-4">
-          <form method="POST" action="addtask.php" class="d-flex justify-content-between align-items-center">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Add new item..."
-              name="task_name"
-            />
-            <button class="btn btn-primary btn-sm rounded ms-2">Add</button>
-          </form>
-        </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
 

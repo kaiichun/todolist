@@ -1,18 +1,16 @@
 <?php
 
-$todolist = [];
+    $todolist = [];
 
-$host = 'devkinsta_db';
-$dbname = 'ToDoList';
-$dbuser = 'root';
-$dbpassword = 'GBhUwpF3t3QzDYbo';
-$database = new PDO(
-    "mysql:host=$host;dbname=$dbname",
+    $host = 'devkinsta_db';
+    $dbname = 'ToDoList';
+    $dbuser = 'root';
+    $dbpassword = 'GBhUwpF3t3QzDYbo';
+    $database = new PDO("mysql:host=$host;dbname=$dbname",
     $dbuser,
-    $dbpassword
-);
+    $dbpassword);
 
-$deletetask = $_POST['deletetask'];
+    $deletetask = $_POST['deletetask'];
 
 if(empty($deletetask)){
     echo "ERROR 404 =)";
