@@ -14,7 +14,7 @@
         $password = $_POST["password"];
 
     if(empty($email)||empty($password)) {
-        echo'All fields are required';
+        $error = 'All fields are required';
     }else{
         $sql='SELECT * FROM users where email = :email';
         $query=$database->prepare($sql);
@@ -25,13 +25,21 @@
     }
 
     if(empty($user)) {
-        echo'Eamil is invalid, pls try agian.';
+        echo'Email is invalid, pls try agian.';
     }else{
         if(password_verify($password, $user['password'])){
             $_SESSION['user'] = $user;
             header("Location: index.php");
             exit;
         }else{
-            echo'Password is not match, pls try agian.';
+            $error = 'Password is not match, pls try agian.';
         }
+    }
+
+    if ( isset( $error ) ) {
+        // store the error message in session
+        $_SESSION['error'] = $error;
+        // redirect the user back to /login
+        header("Location: /login");
+        exit;
     }

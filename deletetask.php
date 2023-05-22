@@ -20,5 +20,5 @@ if(empty($deletetask)){
     $query->execute([
         'id' => $deletetask
     ]);
-    header("Location: index.php");
+    header("Location: /");
 }

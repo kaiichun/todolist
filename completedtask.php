@@ -28,6 +28,6 @@ if(empty($deletetask)){
         'completed' => $completedtask,
         'id' =>$deletetask
     ]); 
-    header("Location: index.php");
+    header("Location: /");
     exit;
 }
