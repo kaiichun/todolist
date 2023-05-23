@@ -25,7 +25,7 @@
     }
 
     if(empty($user)) {
-        echo'Email is invalid, pls try agian.';
+        $error = 'Email is invalid, pls try agian.';
     }else{
         if(password_verify($password, $user['password'])){
             $_SESSION['user'] = $user;
@@ -37,9 +37,7 @@
     }
 
     if ( isset( $error ) ) {
-        // store the error message in session
         $_SESSION['error'] = $error;
-        // redirect the user back to /login
         header("Location: /login");
         exit;
     }
